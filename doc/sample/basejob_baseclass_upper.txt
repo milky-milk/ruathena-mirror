@@ -1,0 +1,11 @@
+/*
+	Узнать информацию о своей профессии.
+*/
+prontera,155,177,1	script	Профессор	725,{
+	mes "[Профессор]";
+	mes "Class: " + Class;
+	mes "BaseClass: " + BaseClass;
+	mes "BaseJob: " + BaseJob;
+	mes "Upper: " + Upper;
+	close;
+}

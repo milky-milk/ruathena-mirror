@@ -1,0 +1,22 @@
+/*
+	Оригинальный код Lupus
+	Перевод Oxxy
+
+	Скрипт использует ВНУТРЕННЮЮ функцию вашего клиента чтобы показать название вещи по её ID
+	^nItemID^XXXX -> Название вещи
+	
+*/
+
+prontera,156,179,6	script	Getiteminfo	117,{
+	mes "Введите ID вещи";
+	input @value;
+	mes "ID вещи: "+@value+" ^nItemID^"+@value;
+	mes "Текущая информация о вещи:";
+	set @id,0;
+
+	L_LOOP:
+	mes " getiteminfo("+@value+","+@id+") = "+getiteminfo(@value,@id);
+	set @id,@id+1;
+	if(@id<14) goto L_LOOP;
+	close;
+}

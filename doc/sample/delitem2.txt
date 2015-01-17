@@ -1,0 +1,34 @@
+/*
+	Пример правильного использования команды Delitem2
+	[10.09.12] Перевод Oxxy
+*/
+
+prontera,160,182,5	script	Удалятель2	51,{
+	mes "Введите ID вещи";
+	next;
+	input @nameid;
+	mes "Количество?";
+	next;
+	input @amount;
+	mes "Вещь распознанна?";
+	next;
+	input @iden;
+	mes "Сколько раз вещь заточена?";
+	next;
+	input @ref;
+	mes "Атрибут?";
+	next;
+	input @attr;
+	mes "4 карты (одна за другой):";
+	next;
+	input @c1;
+	input @c2;
+	input @c3;
+	input @c4;
+	mes "Ваша команда:";
+	mes "delitem2 "+@nameid+","+@amount+","+@iden+","+@ref+","+@attr+","+@c1+","+@c2+","+@c3+","+@c4;
+	next;
+	delitem2 @nameid,@amount,@iden,@ref,@attr,@c1,@c2,@c3,@c4;
+	mes "Сейчас вещь должна была удалиться! -)";
+	close;
+}

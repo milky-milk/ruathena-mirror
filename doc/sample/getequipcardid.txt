@@ -1,0 +1,38 @@
+/*
+	Оригинальный скрипт сделал Lupus
+	Перевод скрипта и новый код Oxxy
+
+	Описание:
+	Даёт информацию о эквип-слоте 1(шапка)
+	Можно использовать, например, для того, чтобы узнать, что у одетого оружия есть элемент Огня?
+*/
+
+prontera,155,177,4	script	Проверь шапку	810,{
+	mes "Проверяю вашу шапку...";
+	set @ref,0;
+
+	if (getequipisequiped(1))
+	{
+
+		set @id,getequipid(1);
+		if(getequipisidentify(1))
+		{
+			set @ref,getequiprefinerycnt(1);
+			mes "Ваша шапка: "+getitemname(@id)+"...";
+			if(@ref)mes "Заточена "+@ref+" раз(-а).";
+			mes "Слот карты 0:"+getequipcardid(1,0)+" 1:"+getequipcardid(1,1);
+			mes "Слот карты 2:"+getequipcardid(1,2)+" 3:"+getequipcardid(1,3);
+			close;
+		}
+
+		mes "Как Вы можете носить не определённую шапку?";
+		npctalk "Вы хакер!";
+		emotion e_wah;
+		close;
+	}
+
+	mes "Ничего?";
+	emotion e_hmm;
+	close;
+
+}

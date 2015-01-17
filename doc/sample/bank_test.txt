@@ -1,0 +1,88 @@
+/* 
+	Пример нпц БАНК
+	[10.09.12] Новый код и текст написал Oxxy
+*/
+prontera,162,188,1	script	Банк	112,{
+	cutin "kafra_06",2;
+	set .npc$, "[Банк]";
+
+	mes .npc$;
+	mes "Приветствуем Вас в банке Пронтеры.";
+	mes "Минимальный вклад Zeny состовляет 1000z.";
+	mes "Что Вы хотите сделать?";
+	next;
+	switch(select("Вложить Zeny","Забрать Zeny","Ничего, извините"))
+	{
+	case 1: // Вложить
+
+		mes .npc$;
+		mes "Сколько Zeny Вы хотите вложить?";
+		next;
+		input @kafrabank;
+
+		if(@kafrabank < 1000)
+		{
+			next;
+			mes .npc$;
+			mes "Извините, но так мало денег нельзя вложить.";
+			close;
+		}
+
+		set @kafrabank2, @kafrabank*1/100;
+		if(@kafrabank + @kafrabank2 > Zeny)
+		{
+			next;
+			mes .npc$;
+			mes "Извините, но у Вас не хватает денег для вложения.";
+			close;
+		}
+		
+		set Zeny, Zeny - @kafrabank - @kafrabank2;
+		set #kafrabank, #kafrabank + @kafrabank;
+		mes "У Вас на счету теперь ^135445 "+@kafrabank2+" Zeny^000000";
+		cutin "kafra_06",255;
+		close;
+
+	case 2: // Забрать
+
+		if(#kafrabank==0)
+		{
+			mes .npc$;
+			mes "На вашем счету 0 Zeny. Вы не можете воспользоваться этой услугой";
+			close;
+		}
+		mes .npc$;
+		mes "Вы можете забрать Zeny столько же или меньше этого числа:";
+		mes "^135445" + #kafrabank + "^000000Zeny";
+		mes "Сколько Zeny Вы хотите забрать?";
+		next;
+		input @kafrabank;
+
+		if(@kafrabank<1)
+		{
+			next;
+			mes .npc$;
+			mes "Вы не можете забрать меньше 1 Zeny.";
+			close;
+		}
+
+		if(@kafrabank>#kafrabank)
+		{
+			next;
+			mes .npc$;
+			mes "Вы не можете забрать больше чем ^135445"+ #kafrabank + "^000000Zeny";
+			close;
+		}
+		set #kafrabank, #kafrabank - @kafrabank;
+		set Zeny, Zeny + @kafrabank;
+		
+		cutin "kafra_06",255;
+		close;
+
+	case 3: // Ничего
+
+		mes .npc$;
+		mes "Досвидания!";
+		cutin "kafra_06",255;
+		close;
+}
